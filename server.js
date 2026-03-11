@@ -6,9 +6,8 @@ const middlewares = jsonServer.defaults();
 
 const port = process.env.PORT || 8000;
 
-server.use(middlewares);
-
 // Allow CORS from any origin so Vercel can fetch the data
+// MUST be before jsonServer.defaults() so it intercepts OPTIONS
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Bypass-Tunnel-Reminder');
@@ -20,6 +19,8 @@ server.use((req, res, next) => {
   
   next();
 });
+
+server.use(middlewares);
 
 server.use(router);
 
