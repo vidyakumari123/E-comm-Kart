@@ -1,7 +1,9 @@
 const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export async function fetchAllProducts() {
-  const response = await fetch(`${apiUrl}/products`);
+  const response = await fetch(`${apiUrl}/products`, {
+    headers: { 'Bypass-Tunnel-Reminder': 'true' }
+  });
   const data = await response.json();
   return data;
 }
@@ -24,18 +26,24 @@ export async function fetchAllProducts() {
 
 
 export async function fetchCategories() {
-  const response = await fetch(`${apiUrl}/categories`);
+  const response = await fetch(`${apiUrl}/categories`, {
+    headers: { 'Bypass-Tunnel-Reminder': 'true' }
+  });
   const data = await response.json();
   return data;
 }
 
 export async function fetchBrands() {
-  const response = await fetch(`${apiUrl}/brands`);
+  const response = await fetch(`${apiUrl}/brands`, {
+    headers: { 'Bypass-Tunnel-Reminder': 'true' }
+  });
   const data = await response.json();
   return data;
 }
 export async function fetchProductById(id) {
-  const response = await fetch(`${apiUrl}/products/`+id);
+  const response = await fetch(`${apiUrl}/products/`+id, {
+    headers: { 'Bypass-Tunnel-Reminder': 'true' }
+  });
   const data = await response.json();
   return data;
 }
@@ -45,7 +53,10 @@ export async function createProduct(product) {
     {
        method: 'POST',
         body: JSON.stringify(product),
-        headers: { 'content-type': 'application/json' },
+        headers: { 
+          'content-type': 'application/json',
+          'Bypass-Tunnel-Reminder': 'true' 
+        },
     }
   );
   const data = await response.json();
@@ -57,7 +68,10 @@ export async function updateProduct(update) {
     {
        method: 'PATCH',
         body: JSON.stringify(update),
-        headers: { 'content-type': 'application/json' },
+        headers: { 
+          'content-type': 'application/json',
+          'Bypass-Tunnel-Reminder': 'true' 
+        },
     }
   );
   const data = await response.json();
@@ -94,7 +108,9 @@ export function fetchProductsByFilters(filter = {}, sort = {}, pagination = {}) 
   }
 
   return new Promise((resolve) => {
-    fetch(`${apiUrl}/products?` + queryString)
+    fetch(`${apiUrl}/products?` + queryString, {
+      headers: { 'Bypass-Tunnel-Reminder': 'true' }
+    })
       .then((response) => {
         const totalItems = response.headers.get('X-Total-Count');
         return response.json().then((data) => ({

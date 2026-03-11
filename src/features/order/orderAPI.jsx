@@ -4,7 +4,10 @@ export async function createOrder(order) {
   const response = await fetch(`${apiUrl}/orders`, {
     method: 'POST',
     body: JSON.stringify(order),
-    headers: { 'content-type': 'application/json' },
+    headers: { 
+      'content-type': 'application/json',
+      'Bypass-Tunnel-Reminder': 'true'
+    },
   });
 
   const data = await response.json();
@@ -22,7 +25,9 @@ export async function fetchAllOrders(sort, pagination) {
     queryString += `${key}=${pagination[key]}&`;
   }
 
-  const response = await fetch(`${apiUrl}/orders?` + queryString);
+  const response = await fetch(`${apiUrl}/orders?` + queryString, {
+    headers: { 'Bypass-Tunnel-Reminder': 'true' }
+  });
 
   const data = await response.json();
   const totalOrders = response.headers.get("X-Total-Count");
@@ -34,7 +39,10 @@ export async function updateOrder(order) {
   const response = await fetch(`${apiUrl}/orders/`+order.id, {
     method: 'PATCH',
     body: JSON.stringify(order),
-    headers: { 'content-type': 'application/json' },
+    headers: { 
+      'content-type': 'application/json',
+      'Bypass-Tunnel-Reminder': 'true'
+    },
   });
 
   const data = await response.json();

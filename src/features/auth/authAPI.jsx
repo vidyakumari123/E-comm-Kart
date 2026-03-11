@@ -4,7 +4,10 @@ export async function createUser(userData) {
   const response = await fetch(`${apiUrl}/users`, {
     method: "POST",
     body: JSON.stringify(userData),
-    headers: { "content-type": "application/json" },
+    headers: { 
+      "content-type": "application/json",
+      "Bypass-Tunnel-Reminder": "true" 
+    },
   });
 
   const data = await response.json();
@@ -15,7 +18,11 @@ export async function checkUser(loginInfo) {
   const email = loginInfo.email;
   const password = loginInfo.password;
 
-  const response = await fetch(`${apiUrl}/users?email=` + email);
+  const response = await fetch(`${apiUrl}/users?email=` + email, {
+    headers: {
+      "Bypass-Tunnel-Reminder": "true" 
+    }
+  });
   const data = await response.json();
 
   if (data.length) {

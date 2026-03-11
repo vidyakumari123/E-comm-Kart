@@ -4,7 +4,10 @@ export async function addToCart(item) {
   const response = await fetch(`${apiUrl}/cart`, {
     method: 'POST',
     body: JSON.stringify(item),
-    headers: { 'content-type': 'application/json' },
+    headers: { 
+      'content-type': 'application/json',
+      'Bypass-Tunnel-Reminder': 'true' 
+    },
   });
 
   const data = await response.json();
@@ -13,7 +16,8 @@ export async function addToCart(item) {
 
 export async function fetchItemsByUserId(userId) {
   const response = await fetch(
-    `${apiUrl}/cart?user=${userId}`
+    `${apiUrl}/cart?user=${userId}`,
+    { headers: { 'Bypass-Tunnel-Reminder': 'true' } }
   );
   const data = await response.json();
   return { data };
@@ -24,7 +28,10 @@ export async function updateCart(update) {
   const response = await fetch(`${apiUrl}/cart/${update.id}`, {
     method: 'PATCH',
     body: JSON.stringify(update),
-    headers: { 'content-type': 'application/json' },
+    headers: { 
+      'content-type': 'application/json',
+      'Bypass-Tunnel-Reminder': 'true'
+    },
   });
 
   const data = await response.json();
@@ -34,7 +41,10 @@ export async function updateCart(update) {
 export async function deleteItemFromCart(itemId) {
   await fetch(`${apiUrl}/cart/${itemId}`, {
     method: 'DELETE',
-    headers: { 'content-type': 'application/json' },
+    headers: { 
+      'content-type': 'application/json',
+      'Bypass-Tunnel-Reminder': 'true'
+    },
   });
 
   return { data: { id: itemId } };
