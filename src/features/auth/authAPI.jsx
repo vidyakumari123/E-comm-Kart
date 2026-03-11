@@ -1,5 +1,7 @@
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 export async function createUser(userData) {
-  const response = await fetch("http://localhost:8000/users", {
+  const response = await fetch(`${apiUrl}/users`, {
     method: "POST",
     body: JSON.stringify(userData),
     headers: { "content-type": "application/json" },
@@ -13,7 +15,7 @@ export async function checkUser(loginInfo) {
   const email = loginInfo.email;
   const password = loginInfo.password;
 
-  const response = await fetch("http://localhost:8000/users?email=" + email);
+  const response = await fetch(`${apiUrl}/users?email=` + email);
   const data = await response.json();
 
   if (data.length) {

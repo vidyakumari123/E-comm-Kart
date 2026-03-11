@@ -1,5 +1,7 @@
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 export async function addToCart(item) {
-  const response = await fetch('http://localhost:8000/cart', {
+  const response = await fetch(`${apiUrl}/cart`, {
     method: 'POST',
     body: JSON.stringify(item),
     headers: { 'content-type': 'application/json' },
@@ -11,7 +13,7 @@ export async function addToCart(item) {
 
 export async function fetchItemsByUserId(userId) {
   const response = await fetch(
-    `http://localhost:8000/cart?user=${userId}`
+    `${apiUrl}/cart?user=${userId}`
   );
   const data = await response.json();
   return { data };
@@ -19,7 +21,7 @@ export async function fetchItemsByUserId(userId) {
 
 
 export async function updateCart(update) {
-  const response = await fetch(`http://localhost:8000/cart/${update.id}`, {
+  const response = await fetch(`${apiUrl}/cart/${update.id}`, {
     method: 'PATCH',
     body: JSON.stringify(update),
     headers: { 'content-type': 'application/json' },
@@ -30,7 +32,7 @@ export async function updateCart(update) {
 }
 
 export async function deleteItemFromCart(itemId) {
-  await fetch(`http://localhost:8000/cart/${itemId}`, {
+  await fetch(`${apiUrl}/cart/${itemId}`, {
     method: 'DELETE',
     headers: { 'content-type': 'application/json' },
   });

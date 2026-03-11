@@ -2340,6 +2340,13 @@
       "addresses": [],
       "role": "admin",
       "id": 11
+    },
+    {
+      "email": "Alice@gmail.com",
+      "password": "Alice@123",
+      "addresses": [],
+      "role": "user",
+      "id": 12
     }
   ],
   "cart": [

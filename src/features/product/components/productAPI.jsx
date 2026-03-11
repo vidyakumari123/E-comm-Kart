@@ -1,5 +1,7 @@
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 export async function fetchAllProducts() {
-  const response = await fetch("http://localhost:8000/products");
+  const response = await fetch(`${apiUrl}/products`);
   const data = await response.json();
   return data;
 }
@@ -22,24 +24,24 @@ export async function fetchAllProducts() {
 
 
 export async function fetchCategories() {
-  const response = await fetch("http://localhost:8000/categories");
+  const response = await fetch(`${apiUrl}/categories`);
   const data = await response.json();
   return data;
 }
 
 export async function fetchBrands() {
-  const response = await fetch("http://localhost:8000/brands");
+  const response = await fetch(`${apiUrl}/brands`);
   const data = await response.json();
   return data;
 }
 export async function fetchProductById(id) {
-  const response = await fetch("http://localhost:8000/products/"+id);
+  const response = await fetch(`${apiUrl}/products/`+id);
   const data = await response.json();
   return data;
 }
 
 export async function createProduct(product) {
-  const response = await fetch("http://localhost:8000/products/",
+  const response = await fetch(`${apiUrl}/products/`,
     {
        method: 'POST',
         body: JSON.stringify(product),
@@ -51,7 +53,7 @@ export async function createProduct(product) {
 }
 
 export async function updateProduct(update) {
-  const response = await fetch("http://localhost:8000/products/"+ update.id,
+  const response = await fetch(`${apiUrl}/products/`+ update.id,
     {
        method: 'PATCH',
         body: JSON.stringify(update),
@@ -92,7 +94,7 @@ export function fetchProductsByFilters(filter = {}, sort = {}, pagination = {}) 
   }
 
   return new Promise((resolve) => {
-    fetch('http://localhost:8000/products?' + queryString)
+    fetch(`${apiUrl}/products?` + queryString)
       .then((response) => {
         const totalItems = response.headers.get('X-Total-Count');
         return response.json().then((data) => ({
