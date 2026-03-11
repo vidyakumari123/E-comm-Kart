@@ -1,16 +1,67 @@
-# React + Vite
+# React E-Commerce Project (ShopKart)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-featured e-commerce frontend web application built with React, Redux Toolkit, React Router, and Tailwind CSS. The project uses a local mock backend powered by `json-server`.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework**: React 19 + Vite
+- **State Management**: Redux Toolkit & React-Redux
+- **Routing**: React Router DOM
+- **Styling**: Tailwind CSS
+- **UI Components**: Headless UI + Heroicons
+- **Forms**: React Hook Form
+- **Mock Backend Server**: json-server
 
-## React Compiler
+## Project Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+Make sure you have Node.js and npm installed on your local machine.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+
+Clone the repository, then navigate to your project root folder and run:
+
+```bash
+npm install
+```
+
+## Running the Application Locally
+
+Since this project relies on a mock backend for data (products, users, orders, cart items), you need to run **two separate servers concurrently**.
+
+### 1. Start the json-server (Mock Backend Database)
+
+Open your terminal in the project root folder and run:
+
+```bash
+npx json-server --watch src/app/data.json --port 8000
+```
+*(Make sure this server stays running in the background as it simulates live API responses at `http://localhost:8000`).*
+
+### 2. Start the Vite Frontend Server
+
+Open a **new terminal tab/window** in the project root folder and run:
+
+```bash
+npm run dev
+```
+
+Your Vite frontend server will now connect to the JSON server endpoints that allow for functionalities like fetching product data, creating accounts, authenticating users, and managing Cartesian operations.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+- `npm run dev` - Starts the development server.
+- `npm run build` - Builds the app for production to the `dist` folder.
+- `npm run preview` - Locally preview the production build.
+- `npm run lint` - Lints the codebase with ESLint.
+
+## Development Environment Variables
+
+The Vite app relies on a `.env` file to locate your mock backend server API. Check that your local `.env` has the following config:
+
+```env
+VITE_API_URL=http://localhost:8000
+```
